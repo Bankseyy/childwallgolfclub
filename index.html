@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Childwall Golf Club | Parkland Golf Course Liverpool</title>
+<meta name="description" content="Childwall Golf Club, Liverpool. Established 1912. A James Braid parkland course and Art Deco clubhouse in Gateacre, five miles from the city centre.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600&family=Spectral:ital,wght@0,300;0,400;1,300&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<!--
+  ═══════════════════════════════════════════════════════════════
+  CHILDWALL GOLF CLUB — homepage V8
+  Structure modelled on Huyton & Prescot. Childwall navy #000032.
+  ═══════════════════════════════════════════════════════════════
+
+  ┌───────────────────────────────────────────────────────────┐
+  │  FOLDER STRUCTURE — create these next to index.html        │
+  └───────────────────────────────────────────────────────────┘
+
+     /assets
+        /video          hero background videos
+        /img            section backgrounds + logo
+        /holes          the 18 hole stills or videos
+
+  ┌───────────────────────────────────────────────────────────┐
+  │  1. HERO VIDEOS   →  /assets/video/                        │
+  └───────────────────────────────────────────────────────────┘
+     Name them hero-1.mp4, hero-2.mp4, hero-3.mp4 ... and add
+     one <source> line per video in the HERO block below. They
+     play in sequence, muted, looping back to the first.
+
+     Dimensions      1920 x 1080 (16:9), landscape
+     Codec           H.264 / MP4  (add .webm too if you can)
+     Length          8-15 seconds each
+     File size       KEEP UNDER 5 MB EACH. This matters more
+                     than quality — a 40 MB hero video means a
+                     blank navy screen for 10 seconds on 4G.
+     Audio           strip it out entirely, it will never play
+     Framing         shoot wide and slow. Drone push-ins over a
+                     fairway, or a slow pan across the clubhouse.
+                     Avoid fast movement: it compresses badly and
+                     fights the text on top.
+
+     ALSO NEEDED: hero-poster.jpg (1920x1080) — the still shown
+     while the video loads and on phones where video is skipped.
+
+  ┌───────────────────────────────────────────────────────────┐
+  │  2. LOGO          →  /assets/img/logo.png                  │
+  └───────────────────────────────────────────────────────────┘
+     Sits above the club name on the hero.
+     Format          PNG with transparent background (or SVG —
+                     better, ask whoever holds the artwork)
+     Dimensions      600px on the longest edge, minimum
+     Colour          must read on a dark video. If the crest is
+                     dark navy, get a white/reversed version.
+
+  ┌───────────────────────────────────────────────────────────┐
+  │  3. SECTION BACKGROUNDS  →  /assets/img/                   │
+  └───────────────────────────────────────────────────────────┘
+     These are the images that change as the page scrolls. Each
+     section is pinned full-screen; the picture behind swaps.
+
+     bg-course.jpg      a fairway framed by trees
+     bg-holes.jpg       wide course shot, works behind the tabs
+     bg-dress.jpg       clubhouse exterior or the terrace
+     bg-find.jpg        the entrance, gates, or clubhouse approach
+
+     Dimensions      2400 x 1600 (3:2), landscape
+     File size       under 400 KB each — export at 70-75% JPEG
+     Framing         leave the middle uncluttered; text sits there
+     Light           shoot early morning or the hour before sunset
+
+  ┌───────────────────────────────────────────────────────────┐
+  │  4. HOLE MEDIA    →  /assets/holes/                        │
+  └───────────────────────────────────────────────────────────┘
+     Name them hole-01.jpg through hole-18.jpg (two digits, so
+     they sort correctly). Video works too — hole-01.mp4 — swap
+     the <img> for a <video> in that panel.
+
+     Dimensions      1600 x 900 (16:9), landscape
+     File size       under 300 KB per still, under 4 MB per video
+     Framing         shoot from the tee looking down the hole.
+                     Drone flyovers are the gold standard here —
+                     Huyton use exactly this and it is the best
+                     thing on their site.
+
+  ┌───────────────────────────────────────────────────────────┐
+  │  HOW TO ADD THEM ON GITHUB                                 │
+  └───────────────────────────────────────────────────────────┘
+     Repo → assets → the right folder → "Add file" → "Upload
+     files" → drag them in → "Commit changes". Live in about a
+     minute. Names must match exactly, lowercase, no spaces.
+
+     Every media tag below is commented out and sits next to a
+     drawn SVG stand-in, so the page works right now with an
+     empty assets folder. Uncomment as the real files land.
+
+  DATA
+  Hole yardages, pars and descriptions are placeholders. Replace
+  with the real card off the yellow tees.
+  ═══════════════════════════════════════════════════════════════
+-->
+
+<style>
+  :root{
+    --navy:#000032;
+    --navy-2:#0A0A46;
+    --navy-3:#20205F;
+    --bone:#F7F6F2;
+    --bone-2:#EAE8E0;
+    --bone-dim:#A9A9C0;
+    --ink-dim:#5A5A78;
+    --gold:#B8912F;
+    --gold-bright:#C7A24B;
+    --turf:#2F7A50;
+
+    --display:"Josefin Sans","Futura",sans-serif;
+    --body:"Spectral",Georgia,serif;
+    --data:"IBM Plex Mono",ui-monospace,monospace;
+
+    --gutter:clamp(1.25rem,5vw,4rem);
+    --measure:78rem;
+    --headh:76px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--navy);color:var(--bone);font-family:var(--body);
+       font-weight:300;font-size:17px;line-height:1.75;-webkit-font-smoothing:antialiased}
+  img,video{max-width:100%;display:block}
+  a{color:inherit;text-decoration:none}
+  :focus-visible{outline:2px solid var(--gold-bright);outline-offset:3px}
+  .wrap{max-width:var(--measure);margin:0 auto;padding-inline:var(--gutter)}
+
+  h1,h2,h3,h4{font-family:var(--display);font-weight:600;text-transform:uppercase;
+              letter-spacing:.075em;line-height:1.05;margin:0}
+  .eyebrow{font-family:var(--data);font-size:.6875rem;letter-spacing:.24em;text-transform:uppercase;
+           color:var(--gold-bright);margin:0 0 1rem}
+  p{margin:0 0 1.15rem}
+
+  .btn{display:inline-block;font-family:var(--data);font-size:.75rem;letter-spacing:.16em;
+       text-transform:uppercase;padding:.9rem 1.5rem;border:1px solid currentColor;cursor:pointer;
+       background:none;transition:background .18s,color .18s,border-color .18s}
+  .btn--gold{background:var(--gold);border-color:var(--gold);color:#fff}
+  .btn--gold:hover{background:#fff;border-color:#fff;color:var(--navy)}
+  .btn--light{color:var(--bone)}
+  .btn--light:hover{background:var(--bone);color:var(--navy)}
+
+  /* ── header ───────────────────────────── */
+  header{position:fixed;top:0;left:0;right:0;z-index:90;height:var(--headh);
+         background:rgba(0,0,50,.86);backdrop-filter:blur(10px);border-bottom:1px solid rgba(199,162,75,.28)}
+  .bar{display:flex;align-items:center;justify-content:space-between;gap:1rem;height:var(--headh)}
+  .brand{display:flex;align-items:center;gap:.75rem;font-family:var(--display);font-weight:600;
+         text-transform:uppercase;letter-spacing:.16em;font-size:.8125rem}
+  .brand .cw{width:34px;height:34px;flex:none;display:grid;place-items:center;
+             border:1px solid var(--gold-bright);color:var(--gold-bright);
+             font-family:var(--data);font-size:.625rem;letter-spacing:.06em}
+  nav ul{display:flex;gap:1.4rem;list-style:none;margin:0;padding:0;font-family:var(--data);
+         font-size:.6875rem;letter-spacing:.16em;text-transform:uppercase}
+  nav a{padding-block:.5rem;border-bottom:1px solid transparent;transition:border-color .2s,color .2s}
+  nav a:hover{border-color:var(--gold-bright);color:var(--gold-bright)}
+  .menu{display:none;background:none;border:0;color:var(--bone);font-family:var(--data);
+        font-size:.6875rem;letter-spacing:.16em;text-transform:uppercase;cursor:pointer}
+
+  /* ── hero ─────────────────────────────── */
+  .hero{position:relative;min-height:100svh;display:grid;place-items:center;
+        text-align:center;padding:calc(var(--headh) + 2rem) var(--gutter) 5rem;overflow:hidden}
+  .hero-bg{position:absolute;inset:0;z-index:0;background:var(--navy-2)}
+  .hero-bg video,.hero-bg svg,.hero-bg img{width:100%;height:100%;object-fit:cover}
+  .hero-bg video{position:absolute;inset:0;opacity:0;transition:opacity .9s}
+  .hero-bg video.on{opacity:1}
+  .hero-scrim{position:absolute;inset:0;z-index:1;
+    background:radial-gradient(70% 60% at 50% 45%,rgba(0,0,50,.55),rgba(0,0,50,.86) 75%),
+               linear-gradient(0deg,var(--navy),transparent 40%)}
+  .hero-in{position:relative;z-index:2;max-width:56rem}
+  .crest{width:clamp(96px,13vw,160px);height:auto;margin:0 auto 1.75rem}
+  .hero h1{font-size:clamp(2.25rem,7.4vw,5.5rem);letter-spacing:.08em}
+  .hero .tag{font-family:var(--data);font-size:clamp(.6875rem,1.3vw,.8125rem);letter-spacing:.28em;
+             text-transform:uppercase;color:var(--gold-bright);margin:1.5rem 0 0}
+  .hero-actions{display:flex;flex-wrap:wrap;gap:.75rem;justify-content:center;margin-top:2.25rem}
+  .scroll-cue{position:absolute;left:50%;bottom:2rem;z-index:2;transform:translateX(-50%);
+              font-family:var(--data);font-size:.625rem;letter-spacing:.24em;text-transform:uppercase;
+              color:var(--bone-dim);animation:bob 2.4s ease-in-out infinite}
+  @keyframes bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,7px)}}
+
+  /* ── scroll-swap background sections ──── */
+  .band{position:relative;min-height:100svh;display:flex;align-items:center;
+        padding-block:clamp(4rem,10vh,7rem);overflow:hidden}
+  .band-bg{position:absolute;inset:0;z-index:0;background:var(--navy-2)}
+  .band-bg img,.band-bg svg{width:100%;height:100%;object-fit:cover;
+    transform:scale(1.06);transition:transform 1.4s cubic-bezier(.2,.7,.2,1),opacity .9s;opacity:.55}
+  .band.seen .band-bg img,.band.seen .band-bg svg{transform:scale(1);opacity:1}
+  .band-scrim{position:absolute;inset:0;z-index:1;
+    background:linear-gradient(0deg,rgba(0,0,50,.95),rgba(0,0,50,.72) 55%,rgba(0,0,50,.6))}
+  .band .wrap{position:relative;z-index:2;width:100%}
+  .band h2{font-size:clamp(2rem,5.4vw,3.75rem)}
+  .band .sub{font-family:var(--display);font-weight:300;text-transform:uppercase;letter-spacing:.16em;
+             font-size:clamp(.9375rem,1.8vw,1.25rem);color:var(--gold-bright);margin:.9rem 0 1.75rem}
+  .band .say{max-width:60ch}
+  .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:clamp(1rem,3vw,2rem);
+        margin-top:2rem}
+  .cardp{background:rgba(10,10,70,.72);border:1px solid var(--navy-3);padding:1.5rem;backdrop-filter:blur(4px)}
+  .cardp h4{font-size:1rem;letter-spacing:.14em;color:var(--gold-bright);margin-bottom:.6rem}
+  .cardp p{margin:0;font-size:.9375rem;color:var(--bone-dim)}
+  .cardp ul{margin:0;padding-left:1.1rem;font-size:.9375rem;color:var(--bone-dim)}
+  .cardp li{padding:.15rem 0}
+
+  /* ── hole-by-hole ─────────────────────── */
+  .tabs{display:flex;flex-wrap:wrap;gap:.35rem;margin:1.5rem 0}
+  .tabs button{font-family:var(--data);font-size:.6875rem;letter-spacing:.08em;
+               width:2.6rem;height:2.6rem;border:1px solid var(--navy-3);background:rgba(10,10,70,.7);
+               color:var(--bone-dim);cursor:pointer;transition:all .18s}
+  .tabs button:hover{border-color:var(--gold-bright);color:var(--gold-bright)}
+  .tabs button[aria-selected="true"]{background:var(--gold);border-color:var(--gold);color:#fff}
+  .hole-panel{display:none;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);
+              gap:clamp(1.25rem,3vw,2.5rem);align-items:stretch}
+  .hole-panel.on{display:grid}
+  .hole-media{position:relative;aspect-ratio:16/9;overflow:hidden;background:var(--navy-2);
+              border:1px solid var(--navy-3)}
+  .hole-media img,.hole-media video,.hole-media svg{width:100%;height:100%;object-fit:cover}
+  .hole-info{background:rgba(10,10,70,.78);border:1px solid var(--navy-3);padding:1.5rem;
+             display:flex;flex-direction:column;backdrop-filter:blur(4px)}
+  .hole-info .no{font-family:var(--display);font-weight:600;font-size:3rem;line-height:1;
+                 color:var(--gold-bright)}
+  .hole-info h3{font-size:1.25rem;margin:.5rem 0 1rem}
+  .hole-info p{font-size:.9375rem;color:var(--bone-dim);flex:1}
+  .hole-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--navy-3);
+              border:1px solid var(--navy-3);margin-top:1rem}
+  .hole-stats div{background:var(--navy-2);padding:.75rem;text-align:center}
+  .hole-stats dt{font-family:var(--data);font-size:.5625rem;letter-spacing:.16em;text-transform:uppercase;
+                 color:var(--bone-dim);margin-bottom:.25rem}
+  .hole-stats dd{font-family:var(--display);font-weight:600;font-size:1.375rem;margin:0}
+  .hole-nav{display:flex;gap:.5rem;margin-top:1rem}
+  .hole-nav button{flex:1;font-family:var(--data);font-size:.625rem;letter-spacing:.14em;
+                   text-transform:uppercase;padding:.7rem;border:1px solid var(--navy-3);
+                   background:none;color:var(--bone);cursor:pointer}
+  .hole-nav button:hover{border-color:var(--gold-bright);color:var(--gold-bright)}
+
+  /* ── find us ──────────────────────────── */
+  .find-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.35fr);
+             gap:clamp(1.5rem,4vw,3rem);align-items:stretch}
+  .map{min-height:22rem;border:1px solid var(--navy-3);background:var(--navy-2)}
+  .map iframe{width:100%;height:100%;min-height:22rem;border:0;display:block;filter:grayscale(1) invert(.92) hue-rotate(190deg)}
+  .addr{font-size:1.0625rem;line-height:2}
+  .addr a:hover{color:var(--gold-bright)}
+
+  /* ── members + footer ─────────────────── */
+  .members{background:var(--gold);color:#fff}
+  .members .inner{display:flex;flex-wrap:wrap;gap:1.5rem;align-items:center;
+                  justify-content:space-between;padding-block:2.25rem}
+  .members h3{font-size:1.625rem}
+  .members p{margin:.3rem 0 0;font-size:.9375rem;max-width:46ch}
+  .members .go{display:inline-block;font-family:var(--data);font-size:.75rem;letter-spacing:.16em;
+               text-transform:uppercase;padding:.9rem 1.5rem;background:var(--navy);color:var(--bone)}
+
+  footer{background:var(--navy);color:var(--bone-dim);padding-block:3.5rem 2.5rem;font-size:.9375rem}
+  .foot-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(13rem,1fr));gap:2rem}
+  footer h4{font-family:var(--data);font-size:.6875rem;letter-spacing:.2em;text-transform:uppercase;
+            color:var(--bone);margin:0 0 1rem}
+  footer ul{list-style:none;margin:0;padding:0}
+  footer li{padding:.2rem 0}
+  footer a:hover{color:var(--gold-bright)}
+  .fine{margin-top:2.5rem;padding-top:1.5rem;border-top:1px solid var(--navy-3);
+        font-family:var(--data);font-size:.625rem;letter-spacing:.14em;text-transform:uppercase}
+
+  @media (max-width:900px){
+    nav{display:none}
+    .menu{display:block}
+    .hole-panel.on,.find-grid{grid-template-columns:1fr}
+    .band{min-height:auto}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important}
+    html{scroll-behavior:auto}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap bar">
+    <a class="brand" href="#top"><span class="cw" aria-hidden="true">CGC</span> Childwall</a>
+    <nav aria-label="Main"><ul>
+      <li><a href="#top">Home</a></li>
+      <li><a href="#news">News</a></li>
+      <li><a href="#course">Information</a></li>
+      <li><a href="#holes">Competitions</a></li>
+      <li><a href="#find">My Golf</a></li>
+    </ul></nav>
+    <div style="display:flex;gap:.5rem;align-items:center">
+      <button class="menu" aria-label="Open menu">Menu</button>
+      <a class="btn btn--gold" href="https://childwall.intelligentgolf.co.uk/">Members Login</a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ═══════════════ HERO ═══════════════
+       Add one <source>-carrying <video> per clip. They cross-fade
+       in sequence. Delete the <svg> once the first video is in. -->
+  <div class="hero">
+    <div class="hero-bg" id="heroBg">
+
+      <!-- SWAP 1: uncomment and add one block per video in /assets/video/
+      <video class="hero-vid on" muted playsinline preload="auto" poster="assets/img/hero-poster.jpg">
+        <source src="assets/video/hero-1.mp4" type="video/mp4">
+      </video>
+      <video class="hero-vid" muted playsinline preload="none">
+        <source src="assets/video/hero-2.mp4" type="video/mp4">
+      </video>
+      <video class="hero-vid" muted playsinline preload="none">
+        <source src="assets/video/hero-3.mp4" type="video/mp4">
+      </video>
+      -->
+
+      <svg viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid slice" role="img"
+           aria-label="Illustration of the clubhouse above the closing green at Childwall">
+        <rect width="1200" height="700" fill="#0A0A46"/>
+        <g stroke="#C7A24B" fill="none" opacity=".2">
+          <circle cx="600" cy="150" r="150"/><circle cx="600" cy="150" r="240"/><circle cx="600" cy="150" r="330"/>
+        </g>
+        <g fill="#000032"><circle cx="70" cy="70" r="150"/><circle cx="1130" cy="80" r="140"/>
+          <circle cx="240" cy="30" r="100"/><circle cx="960" cy="40" r="96"/></g>
+        <path d="M700 340h250v46H700z" fill="#D8D6CE"/>
+        <path d="M612 492v-72a46 46 0 0 1 46-46h404v118z" fill="#F7F6F2"/>
+        <g fill="#20205F"><path d="M684 396h362v20H684z"/><path d="M684 428h362v20H684z"/></g>
+        <path d="M1082 236v256" stroke="#D8D6CE" stroke-width="3"/>
+        <path d="M1084 242l44 15-44 15z" fill="#C7A24B"/>
+        <rect x="586" y="492" width="496" height="8" fill="#D8D6CE"/>
+        <rect y="520" width="1200" height="180" fill="#000032"/>
+        <path d="M0 700c240-124 580-152 1200-182v182z" fill="#05053C"/>
+        <ellipse cx="700" cy="580" rx="200" ry="34" fill="#0E0E4E"/>
+        <path d="M700 580v-62" stroke="#F7F6F2" stroke-width="3"/>
+        <path d="M702 520l30 11-30 11z" fill="#C7A24B"/>
+        <ellipse cx="270" cy="640" rx="120" ry="26" fill="#C7A24B" opacity=".38"/>
+      </svg>
+    </div>
+    <div class="hero-scrim"></div>
+
+    <div class="hero-in">
+      <!-- SWAP 2: the club crest, /assets/img/logo.png -->
+      <!-- <img class="crest" src="assets/img/logo.png" alt="Childwall Golf Club crest" width="600" height="600"> -->
+      <svg class="crest" viewBox="0 0 200 200" role="img" aria-label="Childwall Golf Club crest">
+        <circle cx="100" cy="100" r="92" fill="none" stroke="#C7A24B" stroke-width="2"/>
+        <circle cx="100" cy="100" r="80" fill="none" stroke="#C7A24B" stroke-width="1" opacity=".6"/>
+        <path d="M100 40l14 30 32 4-24 22 7 32-29-16-29 16 7-32-24-22 32-4z" fill="#C7A24B" opacity=".9"/>
+        <text x="100" y="132" text-anchor="middle" fill="#F7F6F2"
+              font-family="Josefin Sans,sans-serif" font-size="26" font-weight="600" letter-spacing="4">CGC</text>
+        <text x="100" y="156" text-anchor="middle" fill="#C7A24B"
+              font-family="IBM Plex Mono,monospace" font-size="11" letter-spacing="3">1912</text>
+      </svg>
+
+      <h1>Childwall Golf Club</h1>
+      <p class="tag">Established 1912 &middot; James Braid parkland &middot; Gateacre, Liverpool</p>
+      <div class="hero-actions">
+        <a class="btn btn--gold" href="#holes">Take the tour</a>
+        <a class="btn btn--light" href="#course">Visitor tee times</a>
+      </div>
+    </div>
+    <span class="scroll-cue">Scroll</span>
+  </div>
+
+  <!-- ═══════════════ 1. THE COURSE ═══════════════ -->
+  <section class="band" id="course">
+    <div class="band-bg">
+      <!-- SWAP 3: /assets/img/bg-course.jpg -->
+      <!-- <img src="assets/img/bg-course.jpg" alt="A fairway at Childwall framed by mature oak and beech" width="2400" height="1600" loading="lazy"> -->
+      <svg viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Illustration of a parkland fairway">
+        <rect width="1200" height="800" fill="#0A0A46"/>
+        <g stroke="#C7A24B" fill="none" opacity=".18"><circle cx="880" cy="150" r="130"/><circle cx="880" cy="150" r="210"/></g>
+        <g fill="#000032"><circle cx="80" cy="220" r="170"/><circle cx="250" cy="170" r="120"/>
+          <circle cx="1140" cy="200" r="150"/><circle cx="990" cy="230" r="100"/></g>
+        <rect y="380" width="1200" height="420" fill="#000032"/>
+        <path d="M0 800c200-282 600-346 1200-386v386z" fill="#05053C"/>
+        <ellipse cx="880" cy="440" rx="140" ry="28" fill="#0E0E4E"/>
+        <path d="M880 440v-56" stroke="#F7F6F2" stroke-width="2.5"/><path d="M882 386l28 11-28 11z" fill="#C7A24B"/>
+        <ellipse cx="330" cy="640" rx="160" ry="34" fill="#C7A24B" opacity=".36"/>
+      </svg>
+    </div>
+    <div class="band-scrim"></div>
+    <div class="wrap">
+      <p class="eyebrow">01 &middot; Established 1912</p>
+      <h2>The Course</h2>
+      <p class="sub">James Braid parkland &middot; Par 72 &middot; 6,015 yards off the yellows</p>
+      <p class="say">Braid laid the course out through mature oak and beech and barely moved a tree. It is not the longest test in Merseyside and it was never meant to be — position beats power on almost every hole, and the greens run quicker and slope harder than they look from the fairway.</p>
+      <p class="say">Sand-banded fairways keep trolleys out through most of the winter, and membership carries reduced green fees at close to three hundred Braid courses across Britain and Ireland.</p>
+      <div class="cols">
+        <div class="cardp"><h4>The test</h4><p>Tree-lined, undulating greens, and a closing stretch that has decided more club championships than the card suggests.</p></div>
+        <div class="cardp"><h4>Practice</h4><p>Short game area, putting green and nets, with the professional taking lessons daily and fitting by appointment.</p></div>
+        <div class="cardp"><h4>Condition</h4><p>Sand-banded fairways, drainage worked hole by hole, and greens cut and rolled through the season.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ 2. HOLE-BY-HOLE ═══════════════ -->
+  <section class="band" id="holes">
+    <div class="band-bg">
+      <!-- SWAP 4: /assets/img/bg-holes.jpg -->
+      <!-- <img src="assets/img/bg-holes.jpg" alt="Wide view across the course at Childwall" width="2400" height="1600" loading="lazy"> -->
+      <svg viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Illustration of a wide view across the course">
+        <rect width="1200" height="800" fill="#0A0A46"/>
+        <g stroke="#C7A24B" fill="none" opacity=".16"><circle cx="300" cy="140" r="120"/><circle cx="300" cy="140" r="200"/></g>
+        <g fill="#000032"><circle cx="1130" cy="190" r="160"/><circle cx="950" cy="220" r="110"/><circle cx="60" cy="230" r="130"/></g>
+        <rect y="400" width="1200" height="400" fill="#000032"/>
+        <path d="M0 800c260-236 640-300 1200-336v336z" fill="#05053C"/>
+        <ellipse cx="640" cy="500" rx="180" ry="32" fill="#0E0E4E"/>
+        <path d="M640 500v-60" stroke="#F7F6F2" stroke-width="2.5"/><path d="M642 442l28 11-28 11z" fill="#C7A24B"/>
+      </svg>
+    </div>
+    <div class="band-scrim"></div>
+    <div class="wrap">
+      <p class="eyebrow">02 &middot; The tour</p>
+      <h2>Hole by Hole</h2>
+      <p class="sub">Eighteen holes, one at a time</p>
+
+      <div class="tabs" role="tablist" aria-label="Choose a hole" id="tabs"></div>
+      <div id="panels"></div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ 3. DRESS CODE ═══════════════ -->
+  <section class="band" id="dress">
+    <div class="band-bg">
+      <!-- SWAP 5: /assets/img/bg-dress.jpg -->
+      <!-- <img src="assets/img/bg-dress.jpg" alt="The Art Deco clubhouse at Childwall" width="2400" height="1600" loading="lazy"> -->
+      <svg viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Illustration of the clubhouse frontage">
+        <rect width="1200" height="800" fill="#0A0A46"/>
+        <g stroke="#C7A24B" fill="none" opacity=".2"><circle cx="240" cy="160" r="130"/><circle cx="240" cy="160" r="210"/></g>
+        <path d="M520 320h430v58H520z" fill="#D8D6CE"/>
+        <path d="M400 562V378a56 56 0 0 1 56-56h504v240z" fill="#F7F6F2"/>
+        <g fill="#20205F"><path d="M494 402h446v36H494z"/><path d="M494 460h446v36H494z"/><path d="M660 562v-48h76v48z"/></g>
+        <rect x="376" y="562" width="600" height="8" fill="#D8D6CE"/>
+        <g stroke="#C7A24B" stroke-width="2" opacity=".6"><path d="M396 570v22M446 570v22M496 570v22M546 570v22M596 570v22M646 570v22M696 570v22M746 570v22M796 570v22M846 570v22M896 570v22M946 570v22"/></g>
+        <rect y="592" width="1200" height="208" fill="#000032"/>
+        <path d="M0 800c260-56 620-72 1200-78v78z" fill="#05053C"/>
+        <path d="M1000 246v316" stroke="#D8D6CE" stroke-width="3"/><path d="M1002 252l42 14-42 14z" fill="#C7A24B"/>
+      </svg>
+    </div>
+    <div class="band-scrim"></div>
+    <div class="wrap">
+      <p class="eyebrow">03 &middot; On the course and in the clubhouse</p>
+      <h2>Dress Code</h2>
+      <p class="sub">Golf style throughout &middot; members and visitors alike</p>
+      <div class="cols">
+        <div class="cardp">
+          <h4>Acceptable</h4>
+          <ul>
+            <li>All golf style clothing</li>
+            <li>Tailored shorts, just above the knee</li>
+            <li>Smart shorts and skirts, just above the knee</li>
+            <li>Golf caps and hats</li>
+          </ul>
+        </div>
+        <div class="cardp">
+          <h4>Footwear</h4>
+          <ul>
+            <li>Golf shoes, rubber or metal spikes in good condition</li>
+            <li>Juniors under 16 may wear clean trainers</li>
+            <li>Clean shoes or change before the changing rooms</li>
+          </ul>
+        </div>
+        <div class="cardp">
+          <h4>Not permitted</h4>
+          <ul>
+            <li>Denim, cargo trousers and shorts</li>
+            <li>Sports and beach shorts, tracksuits</li>
+            <li>Football shirts, vests, sleeveless or collarless shirts</li>
+            <li>Trainers, torn clothing, no socks</li>
+          </ul>
+        </div>
+      </div>
+      <p class="say" style="margin-top:1.5rem;font-size:.9375rem;color:var(--bone-dim)">
+        Placeholder — confirm against the club's current dress standards document before publishing.
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══════════════ 4. FIND US ═══════════════ -->
+  <section class="band" id="find">
+    <div class="band-bg">
+      <!-- SWAP 6: /assets/img/bg-find.jpg -->
+      <!-- <img src="assets/img/bg-find.jpg" alt="The approach to Childwall Golf Club" width="2400" height="1600" loading="lazy"> -->
+      <svg viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Illustration of the club entrance">
+        <rect width="1200" height="800" fill="#0A0A46"/>
+        <g stroke="#C7A24B" fill="none" opacity=".16"><circle cx="900" cy="170" r="120"/><circle cx="900" cy="170" r="196"/></g>
+        <g fill="#000032"><circle cx="120" cy="240" r="180"/><circle cx="1120" cy="250" r="150"/></g>
+        <rect y="440" width="1200" height="360" fill="#000032"/>
+        <path d="M420 800l120-360h120l120 360z" fill="#05053C"/>
+        <g stroke="#C7A24B" stroke-width="3" opacity=".5"><path d="M600 800V460"/></g>
+        <rect x="470" y="380" width="260" height="70" fill="#F7F6F2"/>
+        <text x="600" y="424" text-anchor="middle" fill="#000032" font-family="Josefin Sans,sans-serif" font-size="26" font-weight="600" letter-spacing="3">CHILDWALL</text>
+      </svg>
+    </div>
+    <div class="band-scrim"></div>
+    <div class="wrap">
+      <p class="eyebrow">04 &middot; Gateacre, Liverpool</p>
+      <h2>Find Us</h2>
+      <p class="sub">Five miles from the city centre &middot; minutes from the M62</p>
+      <div class="find-grid">
+        <div>
+          <p class="addr">
+            Childwall Golf Club<br>
+            Naylors Road<br>
+            Gateacre<br>
+            Liverpool L27 2YB<br><br>
+            Tel: <a href="tel:01514870654">0151 487 0654</a><br>
+            <a href="mailto:office@childwallgolfclub.co.uk">office@childwallgolfclub.co.uk</a>
+          </p>
+          <p style="margin-top:1.5rem"><a class="btn btn--gold" href="https://maps.google.com/maps?q=childwall+golf+club" target="_blank" rel="noopener">Directions</a></p>
+        </div>
+        <div class="map">
+          <iframe title="Map showing Childwall Golf Club, Naylors Road, Gateacre, Liverpool"
+                  src="https://maps.google.com/maps?q=childwall%20golf%20club%20liverpool&t=m&z=14&output=embed&iwloc=near"
+                  loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ members ═══════════════ -->
+  <div class="members" id="members">
+    <div class="wrap inner">
+      <div>
+        <h3>Already a member</h3>
+        <p>Tee bookings, competition entry, your handicap and your bill all live in the members' area.</p>
+      </div>
+      <a class="go" href="https://childwall.intelligentgolf.co.uk/">Members Login</a>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h4>Childwall Golf Club</h4>
+        <p style="margin:0">Naylors Road<br>Gateacre<br>Liverpool L27 2YB</p>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="tel:01514870654">0151 487 0654</a></li>
+          <li><a href="mailto:office@childwallgolfclub.co.uk">office@childwallgolfclub.co.uk</a></li>
+          <li>Office, Monday to Friday</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Play</h4>
+        <ul>
+          <li><a href="#course">The course</a></li>
+          <li><a href="#holes">Hole by hole</a></li>
+          <li><a href="#dress">Dress code</a></li>
+          <li><a href="#find">Find us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Club</h4>
+        <ul>
+          <li><a href="#">News</a></li>
+          <li><a href="#">Safeguarding and welfare</a></li>
+          <li><a href="#">Bye laws</a></li>
+          <li><a href="https://childwall.intelligentgolf.co.uk/">Members' area</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="fine">&copy; 2026 The Childwall Golf Club &middot; Established 1912 &middot; GEO certified</p>
+  </div>
+</footer>
+
+<script>
+/* ───────────────────────────────────────────────────────────
+   HOLE DATA — edit this array and the tabs, panels, stats and
+   descriptions all rebuild themselves. Nothing else to touch.
+   Set  media: 'video'  on any hole where you upload an mp4
+   instead of a jpg.
+   ─────────────────────────────────────────────────────────── */
+var HOLES = [
+  {n:1,  name:"Opening drive",   par:4, yds:352, si:9,  media:"img", say:"Placeholder. A straightforward opener that lulls you in — the green falls away at the back more than it looks from the fairway."},
+  {n:2,  name:"The avenue",      par:4, yds:318, si:13, media:"img", say:"Placeholder. Oak both sides off the tee, so position matters more than distance."},
+  {n:3,  name:"Short one",       par:3, yds:164, si:17, media:"img", say:"Placeholder. Club selection is everything; long is dead."},
+  {n:4,  name:"The long one",    par:5, yds:498, si:3,  media:"img", say:"Placeholder. Widest tee shot on the course and the best chance of a birdie on the front nine."},
+  {n:5,  name:"Uphill",          par:4, yds:371, si:5,  media:"img", say:"Placeholder. Plays a club longer than the card suggests."},
+  {n:6,  name:"Dogleg",          par:4, yds:340, si:11, media:"img", say:"Placeholder. Cut too much off and the trees take it."},
+  {n:7,  name:"The pond",        par:3, yds:148, si:15, media:"img", say:"Placeholder. Short, but water short and left concentrates the mind."},
+  {n:8,  name:"Rising",          par:4, yds:389, si:7,  media:"img", say:"Placeholder. A long second into a green that slopes back to front."},
+  {n:9,  name:"Turn for home",   par:5, yds:512, si:1,  media:"img", say:"Placeholder. Stroke index one, and it earns it."},
+  {n:10, name:"Back nine start", par:4, yds:348, si:10, media:"img", say:"Placeholder. Quiet opener to the back nine."},
+  {n:11, name:"Punchbowl",       par:3, yds:172, si:16, media:"img", say:"Placeholder. Green sits in a hollow, so anything on line gathers."},
+  {n:12, name:"The stretch",     par:5, yds:486, si:4,  media:"img", say:"Placeholder. Reachable in two downwind, three otherwise."},
+  {n:13, name:"Blind second",    par:4, yds:365, si:6,  media:"img", say:"Placeholder. Aim on the flagpole from the fairway."},
+  {n:14, name:"Beech corner",    par:4, yds:398, si:2,  media:"img", say:"Placeholder. The hardest par four on the course."},
+  {n:15, name:"Respite",         par:4, yds:326, si:14, media:"img", say:"Placeholder. A chance to steady the card before the finish."},
+  {n:16, name:"Short and mean",  par:3, yds:156, si:18, media:"img", say:"Placeholder. Easiest on the card, and it still takes shots."},
+  {n:17, name:"The closer's set-up", par:5, yds:504, si:8, media:"img", say:"Placeholder. Get it in play and the eighteenth is reachable in regulation."},
+  {n:18, name:"Home",            par:4, yds:368, si:12, media:"img", say:"Placeholder. Uphill approach with the clubhouse terrace watching every putt."}
+];
+
+var tabsEl = document.getElementById('tabs');
+var panelsEl = document.getElementById('panels');
+var cur = 0;
+
+/* stand-in artwork used until a real hole photo is uploaded */
+function stubSVG(h){
+  var green = 180 + (h.par === 3 ? 40 : h.par === 5 ? -30 : 0);
+  return '<svg viewBox="0 0 640 360" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Illustration standing in for a photograph of hole ' + h.n + '">' +
+    '<rect width="640" height="360" fill="#0A0A46"/>' +
+    '<g stroke="#C7A24B" fill="none" opacity=".18"><circle cx="480" cy="60" r="56"/><circle cx="480" cy="60" r="92"/></g>' +
+    '<g fill="#000032"><circle cx="40" cy="120" r="80"/><circle cx="130" cy="100" r="56"/>' +
+    '<circle cx="600" cy="118" r="76"/><circle cx="516" cy="126" r="48"/></g>' +
+    '<rect y="170" width="640" height="190" fill="#000032"/>' +
+    '<path d="M0 360c110-118 320-158 640-176v176z" fill="#05053C"/>' +
+    '<ellipse cx="' + green + '" cy="250" rx="86" ry="20" fill="#0E0E4E"/>' +
+    '<path d="M' + green + ' 250v-44" stroke="#F7F6F2" stroke-width="2.5"/>' +
+    '<path d="M' + (green + 2) + ' 207l20 8-20 8z" fill="#C7A24B"/>' +
+    '<ellipse cx="' + (green - 130) + '" cy="304" rx="60" ry="14" fill="#C7A24B" opacity=".4"/>' +
+    '<text x="596" y="330" text-anchor="end" fill="#C7A24B" opacity=".55" ' +
+    'font-family="IBM Plex Mono,monospace" font-size="15" letter-spacing="2">HOLE ' + h.n + '</text>' +
+  '</svg>';
+}
+
+HOLES.forEach(function(h, i){
+  var b = document.createElement('button');
+  b.type = 'button';
+  b.setAttribute('role', 'tab');
+  b.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
+  b.setAttribute('aria-label', 'Hole ' + h.n);
+  b.textContent = h.n;
+  b.onclick = function(){ show(i); };
+  tabsEl.appendChild(b);
+
+  var pad = h.n < 10 ? '0' + h.n : '' + h.n;
+  var p = document.createElement('div');
+  p.className = 'hole-panel' + (i === 0 ? ' on' : '');
+  p.innerHTML =
+    '<div class="hole-media">' +
+      '<!-- SWAP: /assets/holes/hole-' + pad + '.jpg  (or .mp4 — use the <video> line instead) -->' +
+      '<!-- <img src="assets/holes/hole-' + pad + '.jpg" alt="Hole ' + h.n + ' at Childwall, ' + h.name + '" width="1600" height="900" loading="lazy"> -->' +
+      '<!-- <video src="assets/holes/hole-' + pad + '.mp4" muted playsinline loop autoplay></video> -->' +
+      stubSVG(h) +
+    '</div>' +
+    '<div class="hole-info">' +
+      '<span class="no">' + pad + '</span>' +
+      '<h3>' + h.name + '</h3>' +
+      '<p>' + h.say + '</p>' +
+      '<dl class="hole-stats">' +
+        '<div><dt>Par</dt><dd>' + h.par + '</dd></div>' +
+        '<div><dt>Yards</dt><dd>' + h.yds + '</dd></div>' +
+        '<div><dt>Index</dt><dd>' + h.si + '</dd></div>' +
+      '</dl>' +
+      '<div class="hole-nav">' +
+        '<button type="button" onclick="stepHole(-1)">&#8592; Previous</button>' +
+        '<button type="button" onclick="stepHole(1)">Next &#8594;</button>' +
+      '</div>' +
+    '</div>';
+  panelsEl.appendChild(p);
+});
+
+function show(i){
+  cur = (i + HOLES.length) % HOLES.length;
+  var tabs = tabsEl.children, panels = panelsEl.children;
+  for (var n = 0; n < HOLES.length; n++){
+    tabs[n].setAttribute('aria-selected', n === cur ? 'true' : 'false');
+    panels[n].classList.toggle('on', n === cur);
+  }
+}
+function stepHole(d){ show(cur + d); }
+
+/* reveal the section backgrounds as they scroll into view */
+if ('IntersectionObserver' in window){
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if (e.isIntersecting) e.target.classList.add('seen'); });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.band').forEach(function(b){ io.observe(b); });
+} else {
+  document.querySelectorAll('.band').forEach(function(b){ b.classList.add('seen'); });
+}
+
+/* hero videos: play in sequence, cross-fading */
+(function(){
+  var vids = document.querySelectorAll('.hero-vid');
+  if (!vids.length) return;
+  var i = 0;
+  vids[0].play().catch(function(){});
+  vids.forEach(function(v, n){
+    v.addEventListener('ended', function(){
+      v.classList.remove('on');
+      i = (n + 1) % vids.length;
+      var nx = vids[i];
+      nx.currentTime = 0;
+      nx.classList.add('on');
+      nx.play().catch(function(){});
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
