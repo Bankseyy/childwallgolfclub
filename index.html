@@ -7,15 +7,111 @@
 <meta name="description" content="Childwall Golf Club, Liverpool. Established 1912. A James Braid parkland course and Art Deco clubhouse in Gateacre, five miles from the city centre.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600&family=Spectral:ital,wght@0,300;0,400;1,300&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script>
+/* ═══════════════════════════════════════════════════════════════
+   TYPE CONTROL PANEL
+   ═══════════════════════════════════════════════════════════════
+   Change a font name here and the whole page changes. Nothing to
+   install, nothing else to edit — the font loads itself.
+
+   Use the exact name from fonts.google.com, spaces and all.
+
+   The "style" line matters: say whether the heading font is a
+   sans or a serif and the page sets the capitals and spacing to
+   suit it automatically. Sans faces get wide-tracked CAPITALS;
+   serifs get tighter Mixed Case. Judging a serif in wide capitals
+   makes every serif look wrong, which is why this is automatic.
+
+   ── WORTH TRYING ──────────────────────────────────────────────
+     heading: "Josefin Sans",       style: "sans"    ← current
+     heading: "Outfit",             style: "sans"
+     heading: "Oswald",             style: "sans"
+     heading: "Cormorant Garamond", style: "serif"
+     heading: "Playfair Display",   style: "serif"
+     heading: "Libre Baskerville",  style: "serif"
+     heading: "Fraunces",           style: "serif"
+
+     body:    "Spectral"            ← current
+     body:    "Lora"  /  "Source Serif 4"  /  "Inter"  /  "Karla"
+
+     label:   "IBM Plex Mono"       ← current (buttons, stats)
+     label:   "Space Mono"  /  "Barlow Condensed"  /  "Jost"
+   ═══════════════════════════════════════════════════════════════ */
+
+var TYPE = {
+
+  heading: "Montserrat",      /* big headings, the club name    */
+  style:   "sans",              /* "sans" or "serif" — see above  */
+
+  body:    "Montserrat",          /* paragraphs                     */
+  label:   "Montserrat",     /* buttons, eyebrows, stats       */
+
+  /* ── WEIGHTS ────────────────────────────────────────────────
+     How thick the text is. The scale runs:
+
+        300  light      400  regular     500  medium
+        600  semibold   700  bold
+
+     Change a number and everything of that kind updates. All five
+     weights are loaded, so any number above works in any slot.   */
+
+  weightHeading:  600,   /* THE COURSE, HOLE BY HOLE, the club name */
+  weightSubtitle: 500,   /* the gold line under each heading        */
+  weightBody:     300,   /* paragraphs                              */
+  weightLabel:    600,   /* nav, buttons, eyebrows, ESTABLISHED 1912 */
+  weightFigure:   600,   /* hole numbers, par / yards / index        */
+
+  /* Optional manual override. Leave null to let "style" decide.  */
+  caps:    null,                /* true / false / null            */
+  track:   null                 /* e.g. ".075em" / "-.01em" / null */
+
+};
+
+/* ── nothing below here needs editing ────────────────────────── */
+(function(){
+  var q = function(n, w){ return "family=" + n.replace(/ /g, "+") + ":wght@" + w; };
+  var W = "300;400;500;600;700";
+  var names = [TYPE.heading, TYPE.body, TYPE.label].filter(function(n, i, a){
+    return a.indexOf(n) === i;          /* same font twice? load it once */
+  });
+  var fams = names.map(function(n){ return q(n, W); });
+
+  var link = document.createElement("link");
+  link.rel = "stylesheet";
+  link.href = "https://fonts.googleapis.com/css2?" + fams.join("&") + "&display=swap";
+  document.head.appendChild(link);
+
+  var isSans  = TYPE.style !== "serif";
+  var caps    = TYPE.caps  === null || TYPE.caps === undefined ? isSans : TYPE.caps;
+  var track   = TYPE.track || (isSans ? ".075em" : "-.01em");
+  var fallback = isSans ? "sans-serif" : "serif";
+
+  var r = document.documentElement.style;
+  r.setProperty("--display", '"' + TYPE.heading + '",' + fallback);
+  r.setProperty("--body",    '"' + TYPE.body    + '",Georgia,serif');
+  r.setProperty("--data",    '"' + TYPE.label   + '",ui-monospace,monospace');
+  r.setProperty("--display-case",  caps ? "uppercase" : "none");
+  r.setProperty("--display-track", track);
+
+  r.setProperty("--w-heading",  TYPE.weightHeading  || 600);
+  r.setProperty("--w-subtitle", TYPE.weightSubtitle || 300);
+  r.setProperty("--w-body",     TYPE.weightBody     || 300);
+  r.setProperty("--w-label",    TYPE.weightLabel    || 400);
+  r.setProperty("--w-figure",   TYPE.weightFigure   || 600);
+})();
+</script>
 
 <!--
   ═══════════════════════════════════════════════════════════════
-  CHILDWALL GOLF CLUB — homepage V9
+  CHILDWALL GOLF CLUB — homepage V11
   ═══════════════════════════════════════════════════════════════
 
-  YOU ONLY EVER EDIT ONE THING: the MEDIA block near the bottom
-  of this file (search for "MEDIA CONTROL PANEL").
+  TWO CONTROL PANELS, AND NOTHING ELSE TO EDIT:
+
+    TYPE CONTROL PANEL   — top of this file. Fonts.
+    MEDIA CONTROL PANEL  — bottom of this file. Pictures, videos.
+
+  Search for either name to jump straight to it.
 
   Every picture and video on this page is switched on by typing a
   filename there, and switched off by putting null. No commenting
@@ -31,6 +127,10 @@
 
   /assets/video/   hero videos      1920x1080, MP4, UNDER 5 MB each,
                                     8-15 seconds, no audio track
+  If a photo looks wrong on a phone, it is almost always the crop:
+  set its FOCUS in the panel (e.g. bgCourseFocus: "left") to keep
+  the subject in frame.
+
   /assets/img/     logo + section backgrounds
                      logo.png       600px min, transparent PNG or SVG
                      hero-poster.jpg 1920x1080 (still shown while
@@ -62,6 +162,10 @@
     --display:"Josefin Sans","Futura",sans-serif;
     --body:"Spectral",Georgia,serif;
     --data:"IBM Plex Mono",ui-monospace,monospace;
+    --display-case:uppercase;   /* all set by the TYPE panel */
+    --display-track:.075em;
+    --w-heading:600; --w-subtitle:300; --w-body:300;
+    --w-label:400;   --w-figure:600;
 
     --gutter:clamp(1.25rem,5vw,4rem);
     --measure:78rem;
@@ -70,19 +174,20 @@
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
   body{margin:0;background:var(--navy);color:var(--bone);font-family:var(--body);
-       font-weight:300;font-size:17px;line-height:1.75;-webkit-font-smoothing:antialiased}
+       font-weight:var(--w-body,300);font-size:17px;line-height:1.75;-webkit-font-smoothing:antialiased}
   img,video{max-width:100%;display:block}
   a{color:inherit;text-decoration:none}
   :focus-visible{outline:2px solid var(--gold-bright);outline-offset:3px}
   .wrap{max-width:var(--measure);margin:0 auto;padding-inline:var(--gutter)}
 
-  h1,h2,h3,h4{font-family:var(--display);font-weight:600;text-transform:uppercase;
-              letter-spacing:.075em;line-height:1.05;margin:0}
-  .eyebrow{font-family:var(--data);font-size:.6875rem;letter-spacing:.24em;text-transform:uppercase;
+  h1,h2,h3,h4{font-family:var(--display);font-weight:var(--w-heading,600);
+              text-transform:var(--display-case,uppercase);
+              letter-spacing:var(--display-track,.075em);line-height:1.05;margin:0}
+  .eyebrow{font-family:var(--data);font-weight:var(--w-label,400);font-size:.6875rem;letter-spacing:.24em;text-transform:uppercase;
            color:var(--gold-bright);margin:0 0 1rem}
   p{margin:0 0 1.15rem}
 
-  .btn{display:inline-block;font-family:var(--data);font-size:.75rem;letter-spacing:.16em;
+  .btn{display:inline-block;font-family:var(--data);font-weight:var(--w-label,400);font-size:.75rem;letter-spacing:.16em;
        text-transform:uppercase;padding:.9rem 1.5rem;border:1px solid currentColor;cursor:pointer;
        background:none;transition:background .18s,color .18s,border-color .18s}
   .btn--gold{background:var(--gold);border-color:var(--gold);color:#fff}
@@ -94,12 +199,13 @@
   header{position:fixed;top:0;left:0;right:0;z-index:90;height:var(--headh);
          background:rgba(0,0,50,.86);backdrop-filter:blur(10px);border-bottom:1px solid rgba(199,162,75,.28)}
   .bar{display:flex;align-items:center;justify-content:space-between;gap:1rem;height:var(--headh)}
-  .brand{display:flex;align-items:center;gap:.75rem;font-family:var(--display);font-weight:600;
+  .brand{display:flex;align-items:center;gap:.75rem;font-family:var(--display);font-weight:var(--w-heading,600);
          text-transform:uppercase;letter-spacing:.16em;font-size:.8125rem}
   .brand .cw{width:34px;height:34px;flex:none;display:grid;place-items:center;
              border:1px solid var(--gold-bright);color:var(--gold-bright);
              font-family:var(--data);font-size:.625rem;letter-spacing:.06em}
-  nav ul{display:flex;gap:1.4rem;list-style:none;margin:0;padding:0;font-family:var(--data);
+  .brand img.cw{width:auto;height:34px;border:0;display:block}
+  nav ul{display:flex;gap:1.4rem;list-style:none;margin:0;padding:0;font-family:var(--data);font-weight:var(--w-label,400);
          font-size:.6875rem;letter-spacing:.16em;text-transform:uppercase}
   nav a{padding-block:.5rem;border-bottom:1px solid transparent;transition:border-color .2s,color .2s}
   nav a:hover{border-color:var(--gold-bright);color:var(--gold-bright)}
@@ -118,8 +224,8 @@
                linear-gradient(0deg,var(--navy),transparent 40%)}
   .hero-in{position:relative;z-index:2;max-width:56rem}
   .crest{width:clamp(96px,13vw,160px);height:auto;margin:0 auto 1.75rem}
-  .hero h1{font-size:clamp(2.25rem,7.4vw,5.5rem);letter-spacing:.08em}
-  .hero .tag{font-family:var(--data);font-size:clamp(.6875rem,1.3vw,.8125rem);letter-spacing:.28em;
+  .hero h1{font-size:clamp(2.25rem,7.4vw,5.5rem);letter-spacing:var(--display-track,.08em)}
+  .hero .tag{font-family:var(--data);font-weight:var(--w-label,400);font-size:clamp(.6875rem,1.3vw,.8125rem);letter-spacing:.28em;
              text-transform:uppercase;color:var(--gold-bright);margin:1.5rem 0 0}
   .hero-actions{display:flex;flex-wrap:wrap;gap:.75rem;justify-content:center;margin-top:2.25rem}
   .scroll-cue{position:absolute;left:50%;bottom:2rem;z-index:2;transform:translateX(-50%);
@@ -138,7 +244,7 @@
     background:linear-gradient(0deg,rgba(0,0,50,.95),rgba(0,0,50,.72) 55%,rgba(0,0,50,.6))}
   .band .wrap{position:relative;z-index:2;width:100%}
   .band h2{font-size:clamp(2rem,5.4vw,3.75rem)}
-  .band .sub{font-family:var(--display);font-weight:300;text-transform:uppercase;letter-spacing:.16em;
+  .band .sub{font-family:var(--display);font-weight:var(--w-subtitle,300);text-transform:uppercase;letter-spacing:.16em;
              font-size:clamp(.9375rem,1.8vw,1.25rem);color:var(--gold-bright);margin:.9rem 0 1.75rem}
   .band .say{max-width:60ch}
   .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:clamp(1rem,3vw,2rem);
@@ -164,7 +270,7 @@
   .hole-media img,.hole-media video,.hole-media svg{width:100%;height:100%;object-fit:cover}
   .hole-info{background:rgba(10,10,70,.78);border:1px solid var(--navy-3);padding:1.5rem;
              display:flex;flex-direction:column;backdrop-filter:blur(4px)}
-  .hole-info .no{font-family:var(--display);font-weight:600;font-size:3rem;line-height:1;
+  .hole-info .no{font-family:var(--display);font-weight:var(--w-figure,600);font-size:3rem;line-height:1;
                  color:var(--gold-bright)}
   .hole-info h3{font-size:1.25rem;margin:.5rem 0 1rem}
   .hole-info p{font-size:.9375rem;color:var(--bone-dim);flex:1}
@@ -173,7 +279,7 @@
   .hole-stats div{background:var(--navy-2);padding:.75rem;text-align:center}
   .hole-stats dt{font-family:var(--data);font-size:.5625rem;letter-spacing:.16em;text-transform:uppercase;
                  color:var(--bone-dim);margin-bottom:.25rem}
-  .hole-stats dd{font-family:var(--display);font-weight:600;font-size:1.375rem;margin:0}
+  .hole-stats dd{font-family:var(--display);font-weight:var(--w-figure,600);font-size:1.375rem;margin:0}
   .hole-nav{display:flex;gap:.5rem;margin-top:1rem}
   .hole-nav button{flex:1;font-family:var(--data);font-size:.625rem;letter-spacing:.14em;
                    text-transform:uppercase;padding:.7rem;border:1px solid var(--navy-3);
@@ -223,7 +329,7 @@
 
 <header>
   <div class="wrap bar">
-    <a class="brand" href="#top"><span class="cw" aria-hidden="true">CGC</span> Childwall</a>
+    <a class="brand" href="#top"><span class="cw" id="brandMark" aria-hidden="true">CGC</span> Childwall</a>
     <nav aria-label="Main"><ul>
       <li><a href="#top">Home</a></li>
       <li><a href="#news">News</a></li>
@@ -510,19 +616,42 @@ var MEDIA = {
      sequence. Empty list = drawn illustration.
      e.g. heroVideos: ["hero-1.mp4", "hero-2.mp4"]              */
 
-  heroVideos:  ["hero-1.mp4"],
+  heroVideos:  ["hero-1.mp4"],  /* "hero-1.mp4" in /assets/video/ */
   heroPoster:  "hero-poster.jpg",          /* "hero-poster.jpg"  in /assets/img/ */
+  heroFocus:   "center",      /* same idea as the backgrounds below */
 
   /* ── LOGO ── /assets/img/ ────────────────────────────────── */
 
-  logo:        "logo.png",          /* "logo.png"                       */
+  logo:        "logo.png",          /* on the hero, above the club name */
+  headerLogo:  "logo.png",          /* the small mark in the top bar.
+                                       Set null to keep the CGC box.
+                                       Needs to read on navy — use a
+                                       white/reversed version if you
+                                       have one, e.g. "logo-white.png" */
+  headerLogoHeight: 34,             /* px. Drop to 28 if it crowds the nav */
 
-  /* ── SECTION BACKGROUNDS ── /assets/img/ ─────────────────── */
+  /* ── SECTION BACKGROUNDS ── /assets/img/ ───────────────────
+     Each background has a FOCUS setting: the part of the photo
+     to keep in frame when it gets cropped. On a phone the sides
+     are cropped off, so if the subject sits left or right it can
+     vanish. Set the focus and it stays put.
 
-  bgCourse:    "bg-course.png",          /* "bg-course.jpg"                  */
-  bgHoles:     null,          /* "bg-holes.jpg"                   */
-  bgDress:     null,          /* "bg-dress.jpg"                   */
-  bgFind:      null,          /* "bg-find.jpg"                    */
+        "left"  "center"  "right"        ← the usual ones
+        "30% 50%"                        ← finer control:
+                                            first number across,
+                                            second number down    */
+
+  bgCourse:      "bg-course.png",        /* "bg-course.jpg"                  */
+  bgCourseFocus: "right",
+
+  bgHoles:       null,        /* "bg-holes.jpg"                   */
+  bgHolesFocus:  "center",
+
+  bgDress:       null,        /* "bg-dress.jpg"                   */
+  bgDressFocus:  "center",
+
+  bgFind:        null,        /* "bg-find.jpg"                    */
+  bgFindFocus:   "center",
 
   /* ── THE 18 HOLES ── /assets/holes/ ──────────────────────────
      Put the filename next to the hole number. Photos or videos —
@@ -546,12 +675,13 @@ var PATHS = { video:"assets/video/", img:"assets/img/", holes:"assets/holes/" };
 function isVideo(f){ return /\.(mp4|webm|mov)$/i.test(f); }
 
 /* swap a container's drawn illustration for a real image */
-function setBg(id, file, alt){
+function setBg(id, file, alt, focus){
   if (!file) return;
   var el = document.getElementById(id);
   if (!el) return;
   el.innerHTML = '<img src="' + PATHS.img + file + '" alt="' + alt +
-                 '" width="2400" height="1600" loading="lazy">';
+                 '" width="2400" height="1600" loading="lazy" ' +
+                 'style="object-position:' + (focus || 'center') + '">';
 }
 
 /* hero: one video loops, several cross-fade in sequence */
@@ -564,7 +694,8 @@ function setHero(){
   el.innerHTML = list.map(function(f, i){
     return '<video class="hero-vid' + (i === 0 ? ' on' : '') + '" muted playsinline' +
            (one ? ' loop' : '') + ' preload="' + (i === 0 ? 'auto' : 'none') + '"' +
-           (i === 0 ? poster : '') + '>' +
+           (i === 0 ? poster : '') +
+           ' style="object-position:' + (MEDIA.heroFocus || 'center') + '">' +
            '<source src="' + PATHS.video + f + '" type="video/mp4"></video>';
   }).join('');
 
@@ -580,6 +711,19 @@ function setHero(){
       nx.play().catch(function(){});
     });
   });
+}
+
+/* the small mark in the top bar */
+function setHeaderLogo(){
+  if (!MEDIA.headerLogo) return;
+  var el = document.getElementById('brandMark');
+  if (!el) return;
+  var img = document.createElement('img');
+  img.className = 'cw';
+  img.src = PATHS.img + MEDIA.headerLogo;
+  img.alt = 'Childwall Golf Club';
+  img.style.height = (MEDIA.headerLogoHeight || 34) + 'px';
+  el.replaceWith(img);
 }
 
 /* the crest above the club name */
@@ -715,10 +859,11 @@ if ('IntersectionObserver' in window){
 /* apply the media control panel */
 setHero();
 setLogo();
-setBg('bg-course', MEDIA.bgCourse, 'A fairway at Childwall framed by mature oak and beech');
-setBg('bg-holes',  MEDIA.bgHoles,  'Wide view across the course at Childwall');
-setBg('bg-dress',  MEDIA.bgDress,  'The Art Deco clubhouse at Childwall');
-setBg('bg-find',   MEDIA.bgFind,   'The approach to Childwall Golf Club');
+setHeaderLogo();
+setBg('bg-course', MEDIA.bgCourse, 'A fairway at Childwall framed by mature oak and beech', MEDIA.bgCourseFocus);
+setBg('bg-holes',  MEDIA.bgHoles,  'Wide view across the course at Childwall',                          MEDIA.bgHolesFocus);
+setBg('bg-dress',  MEDIA.bgDress,  'The Art Deco clubhouse at Childwall',                               MEDIA.bgDressFocus);
+setBg('bg-find',   MEDIA.bgFind,   'The approach to Childwall Golf Club',                               MEDIA.bgFindFocus);
 </script>
 
 </body>
