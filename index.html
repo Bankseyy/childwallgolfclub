@@ -286,6 +286,38 @@ var TYPE = {
                    background:none;color:var(--bone);cursor:pointer}
   .hole-nav button:hover{border-color:var(--gold-bright);color:var(--gold-bright)}
 
+  /* ── reviews ──────────────────────────── */
+  .rev-rail{position:relative;margin-top:2rem}
+  .rev-grid{display:flex;gap:clamp(1rem,2.5vw,1.75rem);overflow-x:auto;
+            scroll-snap-type:x mandatory;scroll-behavior:smooth;
+            padding-bottom:.5rem;scrollbar-width:none;-ms-overflow-style:none}
+  .rev-grid::-webkit-scrollbar{display:none}
+  .rev-grid > .rev{flex:0 0 clamp(17rem,29%,23rem);scroll-snap-align:start}
+  .rev-arrows{display:flex;gap:.5rem}
+  .rev-arrows button{width:40px;height:40px;border:1px solid var(--navy-3);
+                     background:rgba(10,10,70,.72);color:var(--bone);cursor:pointer;
+                     font-family:var(--data);font-size:.875rem;line-height:1;
+                     transition:border-color .2s,color .2s}
+  .rev-arrows button:hover{border-color:var(--gold-bright);color:var(--gold-bright)}
+  .rev-arrows button[disabled]{opacity:.3;cursor:default;border-color:var(--navy-3);color:var(--bone)}
+  .rev{background:rgba(10,10,70,.72);border:1px solid var(--navy-3);padding:1.5rem;
+       backdrop-filter:blur(4px);display:flex;flex-direction:column}
+  .stars{display:flex;gap:.2rem;margin-bottom:.9rem}
+  .stars svg{width:18px;height:18px;flex:none}
+  .stars .full{fill:var(--gold-bright)}
+  .stars .empty{fill:none;stroke:var(--gold-bright);stroke-width:1.5;opacity:.45}
+  .rev q{quotes:none;font-size:.9375rem;color:var(--bone);flex:1;margin:0 0 1.1rem}
+  .rev .who{font-family:var(--data);font-weight:var(--w-label,400);font-size:.6875rem;
+            letter-spacing:.16em;text-transform:uppercase;color:var(--gold-bright);margin:0}
+  .rev .when{font-family:var(--data);font-size:.625rem;letter-spacing:.14em;
+             text-transform:uppercase;color:var(--bone-dim);margin:.35rem 0 0}
+  .rev-foot{display:flex;flex-wrap:wrap;gap:1rem;align-items:center;
+            justify-content:space-between;margin-top:1.75rem}
+  .rev-score{display:flex;align-items:center;gap:.75rem;font-family:var(--data);
+             font-size:.75rem;letter-spacing:.16em;text-transform:uppercase;color:var(--bone-dim)}
+  .rev-score b{font-family:var(--display);font-weight:var(--w-figure,600);font-size:1.75rem;
+               letter-spacing:0;color:var(--bone)}
+
   /* ── find us ──────────────────────────── */
   .find-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.35fr);
              gap:clamp(1.5rem,4vw,3rem);align-items:stretch}
@@ -415,13 +447,13 @@ var TYPE = {
     <div class="wrap">
       <p class="eyebrow">01 &middot; Established 1912</p>
       <h2>The Course</h2>
-      <p class="sub">James Braid parkland &middot; Par 72 &middot; 6,015 yards off the yellows</p>
-      <p class="say">Braid laid the course out through mature oak and beech and barely moved a tree. It is not the longest test in Merseyside and it was never meant to be — position beats power on almost every hole, and the greens run quicker and slope harder than they look from the fairway.</p>
-      <p class="say">Sand-banded fairways keep trolleys out through most of the winter, and membership carries reduced green fees at close to three hundred Braid courses across Britain and Ireland.</p>
+      <p class="sub">James Braid parkland &middot; Par 72 &middot; 6568 yards</p>
+      <p class="say">Childwall is a testing 6568 yard parklanbd course which demands accuracy from the tee. It presents a very tough test of golf. The course is not undulating and is very pleasant to walk.</p>
+      <p class="say">The course design was based on the recommendation of James Braid when the Club moved to its present excellent site at Gateacre in 1938</p>
       <div class="cols">
-        <div class="cardp"><h4>The test</h4><p>Tree-lined, undulating greens, and a closing stretch that has decided more club championships than the card suggests.</p></div>
-        <div class="cardp"><h4>Practice</h4><p>Short game area, putting green and nets, with the professional taking lessons daily and fitting by appointment.</p></div>
-        <div class="cardp"><h4>Condition</h4><p>Sand-banded fairways, drainage worked hole by hole, and greens cut and rolled through the season.</p></div>
+        <div class="cardp"><h4>PRACTICE</h4><p>Short game practice area, chipping green, putting green and nets. Professional lessons available with a well-stocked pro shop.</p></div>
+        <div class="cardp"><h4>THE COURSE</h4><p>Tree-lined fairways, bunkers left and right, accuracy is a must. Undulating greens will test all of your skills</p></div>
+        <div class="cardp"><h4>THE 19TH HOLE</h4><p>Immaculate clubhouse serving excellent food in a friendly, hoispitable atmosphere. Designed by Alderman Shennan who subsequently designed the Royal Birkdale Clubhouse.</p></div>
       </div>
     </div>
   </section>
@@ -450,58 +482,40 @@ var TYPE = {
     </div>
   </section>
 
-  <!-- ═══════════════ 3. DRESS CODE ═══════════════ -->
-  <section class="band" id="dress">
-    <div class="band-bg" id="bg-dress">
-      <svg viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Illustration of the clubhouse frontage">
+  <!-- ═══════════════ 3. REVIEWS ═══════════════ -->
+  <section class="band" id="reviews">
+    <div class="band-bg" id="bg-reviews">
+      <svg viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Illustration of the course at dusk">
         <rect width="1200" height="800" fill="#0A0A46"/>
-        <g stroke="#C7A24B" fill="none" opacity=".2"><circle cx="240" cy="160" r="130"/><circle cx="240" cy="160" r="210"/></g>
-        <path d="M520 320h430v58H520z" fill="#D8D6CE"/>
-        <path d="M400 562V378a56 56 0 0 1 56-56h504v240z" fill="#F7F6F2"/>
-        <g fill="#20205F"><path d="M494 402h446v36H494z"/><path d="M494 460h446v36H494z"/><path d="M660 562v-48h76v48z"/></g>
-        <rect x="376" y="562" width="600" height="8" fill="#D8D6CE"/>
-        <g stroke="#C7A24B" stroke-width="2" opacity=".6"><path d="M396 570v22M446 570v22M496 570v22M546 570v22M596 570v22M646 570v22M696 570v22M746 570v22M796 570v22M846 570v22M896 570v22M946 570v22"/></g>
-        <rect y="592" width="1200" height="208" fill="#000032"/>
-        <path d="M0 800c260-56 620-72 1200-78v78z" fill="#05053C"/>
-        <path d="M1000 246v316" stroke="#D8D6CE" stroke-width="3"/><path d="M1002 252l42 14-42 14z" fill="#C7A24B"/>
+        <g stroke="#C7A24B" fill="none" opacity=".18">
+          <circle cx="600" cy="180" r="140"/><circle cx="600" cy="180" r="220"/><circle cx="600" cy="180" r="300"/>
+        </g>
+        <g fill="#000032"><circle cx="90" cy="220" r="170"/><circle cx="1130" cy="230" r="160"/>
+          <circle cx="270" cy="180" r="100"/><circle cx="950" cy="190" r="96"/></g>
+        <rect y="420" width="1200" height="380" fill="#000032"/>
+        <path d="M0 800c240-250 620-310 1200-344v344z" fill="#05053C"/>
+        <ellipse cx="620" cy="520" rx="190" ry="34" fill="#0E0E4E"/>
+        <path d="M620 520v-64" stroke="#F7F6F2" stroke-width="3"/>
+        <path d="M622 458l30 11-30 11z" fill="#C7A24B"/>
+        <ellipse cx="280" cy="660" rx="130" ry="28" fill="#C7A24B" opacity=".36"/>
       </svg>
     </div>
     <div class="band-scrim"></div>
     <div class="wrap">
-      <p class="eyebrow">03 &middot; On the course and in the clubhouse</p>
-      <h2>Dress Code</h2>
-      <p class="sub">Golf style throughout &middot; members and visitors alike</p>
-      <div class="cols">
-        <div class="cardp">
-          <h4>Acceptable</h4>
-          <ul>
-            <li>All golf style clothing</li>
-            <li>Tailored shorts, just above the knee</li>
-            <li>Smart shorts and skirts, just above the knee</li>
-            <li>Golf caps and hats</li>
-          </ul>
-        </div>
-        <div class="cardp">
-          <h4>Footwear</h4>
-          <ul>
-            <li>Golf shoes, rubber or metal spikes in good condition</li>
-            <li>Juniors under 16 may wear clean trainers</li>
-            <li>Clean shoes or change before the changing rooms</li>
-          </ul>
-        </div>
-        <div class="cardp">
-          <h4>Not permitted</h4>
-          <ul>
-            <li>Denim, cargo trousers and shorts</li>
-            <li>Sports and beach shorts, tracksuits</li>
-            <li>Football shirts, vests, sleeveless or collarless shirts</li>
-            <li>Trainers, torn clothing, no socks</li>
-          </ul>
-        </div>
+      <p class="eyebrow">03 &middot; What visitors say</p>
+      <h2>Reviews</h2>
+      <p class="sub" id="revSub">From members, visitors and societies</p>
+      <div class="rev-rail">
+        <div class="rev-grid" id="revGrid"></div>
       </div>
-      <p class="say" style="margin-top:1.5rem;font-size:.9375rem;color:var(--bone-dim)">
-        Placeholder — confirm against the club's current dress standards document before publishing.
-      </p>
+      <div class="rev-foot">
+        <div class="rev-score" id="revScore"></div>
+        <div class="rev-arrows" id="revArrows">
+          <button type="button" aria-label="Previous reviews" onclick="revScroll(-1)">&#8592;</button>
+          <button type="button" aria-label="More reviews" onclick="revScroll(1)">&#8594;</button>
+        </div>
+        <a class="btn btn--light" id="revLink" href="#">Read more on Google</a>
+      </div>
     </div>
   </section>
 
@@ -578,7 +592,7 @@ var TYPE = {
         <ul>
           <li><a href="#course">The course</a></li>
           <li><a href="#holes">Hole by hole</a></li>
-          <li><a href="#dress">Dress code</a></li>
+          <li><a href="#reviews">Reviews</a></li>
           <li><a href="#find">Find us</a></li>
         </ul>
       </div>
@@ -644,13 +658,10 @@ var MEDIA = {
   bgCourse:      "bg-course.png",        /* "bg-course.jpg"                  */
   bgCourseFocus: "right",
 
-  bgHoles:       null,        /* "bg-holes.jpg"                   */
-  bgHolesFocus:  "center",
+  bgHoles:       "bg-holes.png",        /* "bg-holes.jpg"                   */
+  bgHolesFocus:  "left",
 
-  bgDress:       null,        /* "bg-dress.jpg"                   */
-  bgDressFocus:  "center",
-
-  bgFind:        null,        /* "bg-find.jpg"                    */
+  bgFind:        "bg-findus.png",        /* "bg-find.jpg"                    */
   bgFindFocus:   "center",
 
   /* ── THE 18 HOLES ── /assets/holes/ ──────────────────────────
@@ -659,10 +670,70 @@ var MEDIA = {
      e.g.   1: "hole-01.jpg",                                    */
 
   holes: {
-     1: null,   2: null,   3: null,   4: null,   5: null,   6: null,
-     7: null,   8: null,   9: null,  10: null,  11: null,  12: null,
-    13: null,  14: null,  15: null,  16: null,  17: null,  18: null
-  }
+     1: "hole_01.mp4",   2: "hole_02.mp4",   3: "hole_03.mp4",   4: "hole_04.mp4",   5: "hole_05.mp4",   6: "hole_06.mp4",
+     7: "hole_07.mp4",   8: "hole_08.mp4",   9: "hole_09.mp4",  10: "hole_10.mp4",  11: "hole_11.mp4",  12: "hole_12.mp4",
+    13: "hole_13.mp4",  14: "hole_14.mp4",  15: "hole_15.mp4",  16: "hole_16.mp4",  17: "hole_17.mp4",  18: "hole_18.mp4"
+  },
+
+  /* ── SECTION BACKGROUND for the reviews band ── /assets/img/ ── */
+
+  bgReviews:      "bg-reviews.png",       /* "bg-reviews.jpg"                 */
+  bgReviewsFocus: "center"
+
+};
+
+/* ═══════════════════════════════════════════════════════════════
+   REVIEWS CONTROL PANEL
+   ═══════════════════════════════════════════════════════════════
+   Paste reviews in here. Add or delete a block to add or remove a
+   card — the row re-flows on its own. Stars are drawn, not images,
+   so any number from 1 to 5 works. Halves are fine: 4.5.
+
+   Add as many as you like — past three they scroll sideways, with
+   arrows appearing automatically. Keep quotes short: two or three
+   lines each reads best.
+   ═══════════════════════════════════════════════════════════════ */
+
+var REVIEWS = {
+
+  subtitle: "From members, visitors and societies",
+
+  showScore: true,          /* the summary line under the cards   */
+  score:     4.6,
+  count:     128,
+
+  link:      "https://www.google.com/maps/search/childwall+golf+club",
+
+  /* ── THE REVIEWS ─────────────────────────────────────────────
+     Copy a block, paste it, edit it. Order here = order on page. */
+
+  list: [
+    {
+      stars: 5,
+      text:  "Excellent parkland course, well laid out with manicured fairways and manageable rough. Good club facilities with friendly staff, bar snacks and beer at reasonable prices. Well stocked professional shop with expert advice and tuition.",
+      name:  "Michael P",
+      when:  "August 2026"
+    },
+    {
+      stars: 5,
+      text:  "Great greens at Childwall and the course is a fair challenge. Love the clubhouse which has shades of Royal Birkdale in it's design.",
+      name:  "Geoff D",
+      when:  "August 2026"
+    },
+
+        {
+      stars: 5,
+      text:  "Course in great shape, and a fair course to play no matter what your handicap is, staff were very friendly and approachable",
+      name:  "Christoper B",
+      when:  "August 2026"
+    },
+        {
+      stars: 5,
+      text:  "Course,greens,tees, absolutely first class. Food excellent and Ric's Seniors and staff made us so welcome. Great day with Helsby seniors.",
+      name:  "John B",
+      when:  "July 2026"
+    },
+  ]
 
 };
 
@@ -759,24 +830,24 @@ function holeMedia(h, pad){
    instead of a jpg.
    ─────────────────────────────────────────────────────────── */
 var HOLES = [
-  {n:1,  name:"Opening drive",   par:4, yds:352, si:9,  media:"img", say:"Placeholder. A straightforward opener that lulls you in — the green falls away at the back more than it looks from the fairway."},
-  {n:2,  name:"The avenue",      par:4, yds:318, si:13, media:"img", say:"Placeholder. Oak both sides off the tee, so position matters more than distance."},
-  {n:3,  name:"Short one",       par:3, yds:164, si:17, media:"img", say:"Placeholder. Club selection is everything; long is dead."},
-  {n:4,  name:"The long one",    par:5, yds:498, si:3,  media:"img", say:"Placeholder. Widest tee shot on the course and the best chance of a birdie on the front nine."},
-  {n:5,  name:"Uphill",          par:4, yds:371, si:5,  media:"img", say:"Placeholder. Plays a club longer than the card suggests."},
-  {n:6,  name:"Dogleg",          par:4, yds:340, si:11, media:"img", say:"Placeholder. Cut too much off and the trees take it."},
-  {n:7,  name:"The pond",        par:3, yds:148, si:15, media:"img", say:"Placeholder. Short, but water short and left concentrates the mind."},
-  {n:8,  name:"Rising",          par:4, yds:389, si:7,  media:"img", say:"Placeholder. A long second into a green that slopes back to front."},
-  {n:9,  name:"Turn for home",   par:5, yds:512, si:1,  media:"img", say:"Placeholder. Stroke index one, and it earns it."},
-  {n:10, name:"Back nine start", par:4, yds:348, si:10, media:"img", say:"Placeholder. Quiet opener to the back nine."},
-  {n:11, name:"Punchbowl",       par:3, yds:172, si:16, media:"img", say:"Placeholder. Green sits in a hollow, so anything on line gathers."},
-  {n:12, name:"The stretch",     par:5, yds:486, si:4,  media:"img", say:"Placeholder. Reachable in two downwind, three otherwise."},
-  {n:13, name:"Blind second",    par:4, yds:365, si:6,  media:"img", say:"Placeholder. Aim on the flagpole from the fairway."},
-  {n:14, name:"Beech corner",    par:4, yds:398, si:2,  media:"img", say:"Placeholder. The hardest par four on the course."},
-  {n:15, name:"Respite",         par:4, yds:326, si:14, media:"img", say:"Placeholder. A chance to steady the card before the finish."},
-  {n:16, name:"Short and mean",  par:3, yds:156, si:18, media:"img", say:"Placeholder. Easiest on the card, and it still takes shots."},
-  {n:17, name:"The closer's set-up", par:5, yds:504, si:8, media:"img", say:"Placeholder. Get it in play and the eighteenth is reachable in regulation."},
-  {n:18, name:"Home",            par:4, yds:368, si:12, media:"img", say:"Placeholder. Uphill approach with the clubhouse terrace watching every putt."}
+  {n:1,  name:"HOLE ONE",        par:4, yds:401, si:8,  media:"img", say:"The first shot is a straightforward drive but you could catch bunkers right and left from a slight pulled or pushed drive. Your second shot will be a short to mid iron into a fairly flat green."},
+  {n:2,  name:"HOLE TWO",      par:5, yds:510, si:6, media:"img", say:"Keep your drive in the middle or left of the fairway.  There is Out of Bounds on the right.  Your second shot will be straight down a gentle slope leaving a short iron third shot into a McKenzie green."},
+  {n:3,  name:"HOLE THREE",       par:3, yds:176, si:12, media:"img", say:"Placeholder. Club selection is everything; long is dead."},
+  {n:4,  name:"HOLE FOUR",    par:4, yds:392, si:4,  media:"img", say:"Placeholder. Widest tee shot on the course and the best chance of a birdie on the front nine."},
+  {n:5,  name:"HOLE FIVE",          par:4, yds:315, si:18,  media:"img", say:"Placeholder. Plays a club longer than the card suggests."},
+  {n:6,  name:"HOLE SIX",          par:3, yds:174, si:16, media:"img", say:"Placeholder. Cut too much off and the trees take it."},
+  {n:7,  name:"HOLE SEVEN",        par:4, yds:360, si:10, media:"img", say:"Placeholder. Short, but water short and left concentrates the mind."},
+  {n:8,  name:"HOLE EIGHT",          par:5, yds:505, si:14,  media:"img", say:"Placeholder. A long second into a green that slopes back to front."},
+  {n:9,  name:"HOLE NINE",   par:4, yds:429, si:1,  media:"img", say:"Placeholder. Stroke index one, and it earns it."},
+  {n:10, name:"HOLE TEN", par:5, yds:538, si:9, media:"img", say:"Placeholder. Quiet opener to the back nine."},
+  {n:11, name:"HOLE ELEVEN",       par:4, yds:331, si:15, media:"img", say:"Placeholder. Green sits in a hollow, so anything on line gathers."},
+  {n:12, name:"HOLE TWELVE",     par:4, yds:385, si:3,  media:"img", say:"Placeholder. Reachable in two downwind, three otherwise."},
+  {n:13, name:"HOLE THIRTEEN",    par:3, yds:155, si:13,  media:"img", say:"Placeholder. Aim on the flagpole from the fairway."},
+  {n:14, name:"HOLE FOURTEEN",    par:5, yds:491, si:17,  media:"img", say:"Placeholder. The hardest par four on the course."},
+  {n:15, name:"HOLE FIFTEEN",         par:4, yds:406, si:5, media:"img", say:"Placeholder. A chance to steady the card before the finish."},
+  {n:16, name:"HOLE SIXTEEN",  par:3, yds:159, si:11, media:"img", say:"Placeholder. Easiest on the card, and it still takes shots."},
+  {n:17, name:"HOLE SEVENTEEN", par:4, yds:417, si:2, media:"img", say:"Placeholder. Get it in play and the eighteenth is reachable in regulation."},
+  {n:18, name:"HOLE EIGHTEEN",            par:4, yds:424, si:7, media:"img", say:"Placeholder. Uphill approach with the clubhouse terrace watching every putt."}
 ];
 
 var tabsEl = document.getElementById('tabs');
@@ -862,8 +933,84 @@ setLogo();
 setHeaderLogo();
 setBg('bg-course', MEDIA.bgCourse, 'A fairway at Childwall framed by mature oak and beech', MEDIA.bgCourseFocus);
 setBg('bg-holes',  MEDIA.bgHoles,  'Wide view across the course at Childwall',                          MEDIA.bgHolesFocus);
-setBg('bg-dress',  MEDIA.bgDress,  'The Art Deco clubhouse at Childwall',                               MEDIA.bgDressFocus);
 setBg('bg-find',   MEDIA.bgFind,   'The approach to Childwall Golf Club',                               MEDIA.bgFindFocus);
+setBg('bg-reviews', MEDIA.bgReviews, 'The course at Childwall', MEDIA.bgReviewsFocus);
+
+/* ── reviews ─────────────────────────────────────────────────── */
+function starRow(n){
+  var out = '<div class="stars" role="img" aria-label="' + n + ' out of 5 stars">';
+  var d = 'M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.9L12 17.8 5.8 21.1 7 14.2 2 9.3l6.9-1z';
+  for (var i = 1; i <= 5; i++){
+    if (n >= i){
+      out += '<svg viewBox="0 0 24 24" aria-hidden="true"><path class="full" d="' + d + '"/></svg>';
+    } else if (n >= i - 0.5){
+      out += '<svg viewBox="0 0 24 24" aria-hidden="true">' +
+             '<defs><linearGradient id="hg' + i + '">' +
+             '<stop offset="50%" stop-color="#C7A24B"/>' +
+             '<stop offset="50%" stop-color="#C7A24B" stop-opacity="0"/></linearGradient></defs>' +
+             '<path class="empty" d="' + d + '"/>' +
+             '<path fill="url(#hg' + i + ')" d="' + d + '"/></svg>';
+    } else {
+      out += '<svg viewBox="0 0 24 24" aria-hidden="true"><path class="empty" d="' + d + '"/></svg>';
+    }
+  }
+  return out + '</div>';
+}
+
+function esc(t){
+  return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+(function(){
+  if (typeof REVIEWS === 'undefined') return;
+  var grid = document.getElementById('revGrid');
+  if (!grid) return;
+
+  document.getElementById('revSub').textContent = REVIEWS.subtitle || '';
+
+  grid.innerHTML = (REVIEWS.list || []).map(function(r){
+    return '<article class="rev">' + starRow(r.stars) +
+           '<q>' + esc(r.text) + '</q>' +
+           '<p class="who">' + esc(r.name) + '</p>' +
+           (r.when ? '<p class="when">' + esc(r.when) + '</p>' : '') +
+           '</article>';
+  }).join('');
+
+  var sc = document.getElementById('revScore');
+  if (REVIEWS.showScore === false){ sc.style.display = 'none'; }
+  else {
+    sc.innerHTML = '<b>' + REVIEWS.score + '</b>' + starRow(REVIEWS.score) +
+                   '<span>' + REVIEWS.count + ' Google reviews</span>';
+  }
+
+  var lk = document.getElementById('revLink');
+  if (REVIEWS.link) lk.href = REVIEWS.link; else lk.style.display = 'none';
+
+  revArrowState();
+  grid.addEventListener('scroll', revArrowState);
+  window.addEventListener('resize', revArrowState);
+})();
+
+/* move the rail by one card */
+function revScroll(dir){
+  var g = document.getElementById('revGrid');
+  var card = g.querySelector('.rev');
+  if (!card) return;
+  var step = card.getBoundingClientRect().width + 24;
+  g.scrollBy({ left: dir * step, behavior: 'smooth' });
+}
+
+/* grey the arrows out at each end, hide them if everything fits */
+function revArrowState(){
+  var g = document.getElementById('revGrid');
+  var box = document.getElementById('revArrows');
+  if (!g || !box) return;
+  var over = g.scrollWidth - g.clientWidth;
+  box.style.display = over > 8 ? 'flex' : 'none';
+  var b = box.querySelectorAll('button');
+  b[0].disabled = g.scrollLeft <= 4;
+  b[1].disabled = g.scrollLeft >= over - 4;
+}
 </script>
 
 </body>
